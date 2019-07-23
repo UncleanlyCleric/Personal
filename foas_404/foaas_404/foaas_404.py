@@ -14,3 +14,5 @@ reference
 
 :requirements: pip install foaas; wsgi
 '''
+import random
+import foaas
