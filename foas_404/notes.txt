@@ -1,0 +1,30 @@
+18<26eightdigit18> unfortunately slap over IP still isn't a thing... but in the interim.... https://foaas.com/
+18<22Minerva18> [ Fuck Off As A Service (FOAAS) ] - foaas.com
+18<28towelbot18> Well, okay
+18<28towelbot18> Thank you paris
+18<28pwager18> Yes, I would like to subscribe to your newsletter
+18<26eightdigit18> twats
+20<Junya_Work>30 i...
+20<Junya_Work>30 i have uses for this
+18<28towelbot18> Could we use Foaas to fuel our custom 404's?
+18<28pwager18> hahaha
+20<Junya_Work>30 maybe
+18<25sterb18> I say yes.
+20<Junya_Work>30 we'd have to populate some :name:, :company:, and :from: entries if you want it truly random
+18<25sterb18> I'm sure this can be done.
+20<Junya_Work>30 oh, sure
+18<28towelbot18> I think the landscape of video games is full of all of those things we could throw in a firebase DB to fill it
+20<Junya_Work>30 random.choice(name)) on a use by use case
+20<Junya_Work>30 or whatever
+20<Junya_Work>30 make a tuple of names:  name = [talbot, james, gwen, paul, aidan] # etc etc
+20<Junya_Work>30 honestly, it'd just be a series of random.choices() based off of whatever random fuck off is chosen
+20<Junya_Work>30 ultimately the final variable list gets sent to the api and 'return fuck_off' happens for the 404 page
+20<Junya_Work>30 yea, i already have it half mapped in my head
+18<28pwager18> I'm very ok with this
+18<29liquordrums18> heh
+18<28towelbot18> Okay
+18<28towelbot18> Well, Jesse
+18<28towelbot18> let's make a new website
+18<28towelbot18> Jesus, it's not like I haven't asked before ;)
+20<Junya_Work>30 fair
+20<Junya_Work>30 hang on, let me note this and put it in a repo
