@@ -46,28 +46,22 @@ def template():
     return page_template
 
 
-def get_fucked():
+def get_names():
     '''
     Function name says it all.
     '''
     name = ['Alucard', 'Simon Belmont', 'Dracula', 'Carmilla']
-    f_name = random.choice(name)
-    t_name = random.choice(name)
-    f = foaas.Fuck()
-
-    fucked = f.random(name=t_name, _from=f_name)
-
-    return fucked
+    return random.choice(name)
 
 
 @app.route("/")
-def fucking_return():
+def f_return():
     '''
     Web application home page.
     '''
-    fuck_you = get_fucked()
-
-    return template().format(fuck_you)
+    f = foaas.Fuck()
+    f_you = f.random(name=(get_names()), _from=(get_names()))
+    return template().format(f_you)
 
 
 if __name__ == '__main__':
