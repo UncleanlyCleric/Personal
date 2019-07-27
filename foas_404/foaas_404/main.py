@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
+'''
+foaas 404
+'''
 # pylint: disable = C0103
+import os
+import random
+from flask import Flask
+import foaas
 '''
 This will pull a random "Fuck off as a service" request from the
 https://foaas.com/ website API, and insert variables as needed for the
@@ -9,10 +16,6 @@ API request to be returned as a custom 404 page.
 
 :requirements: pip install foaas; wsgi
 '''
-import os
-import random
-from flask import Flask
-import foaas
 
 
 app = Flask(__name__)
