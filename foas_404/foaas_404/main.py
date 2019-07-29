@@ -53,7 +53,10 @@ def get_names():
     '''
     Function name says it all.
     '''
-    name = ['Alucard', 'Simon Belmont', 'Dracula', 'Carmilla']
+    name = ['Alucard', 'Simon Belmont', 'Dracula', 'Carmilla', 'Death',
+            'The Ferryman', 'Christopher Belmont', 'Soleiyu Belmont',
+            'Trevor Belmont', 'Grant Danasty', 'Sypha Belnades', 'Hector',
+            'Issac', 'Julia Laforeze', 'Saint Germain', 'Angela']
     return random.choice(name)
 
 
@@ -63,7 +66,7 @@ def f_return():
     Web application home page.
     '''
     f = foaas.Fuck()
-    f_you = f.random(name=(get_names()), _from=(get_names()))
+    f_you = f.random(name=(get_names()), from_=(get_names())).text
     return template().format(f_you)
 
 
