@@ -78,6 +78,16 @@ the skeleton key into the Dickbutt\'s orifice. You feel somewhat dirty'.format\
                                                                  self.value,
                                                                  self.damage)
 
+    class Rock(Weapon):
+        '''
+        Starting weapon, available in room one
+        '''
+        def __init__(self):
+            super().__init__(name='Rock',
+                             description='"I got a rock" - C. Brown, 1966',
+                             value=5,
+                             damage=2)
+
 
     class Dagger(Weapon):
         '''
