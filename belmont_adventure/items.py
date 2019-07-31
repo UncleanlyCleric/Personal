@@ -141,7 +141,7 @@ chants backwards.',
         The weapon of Jesse
         '''
         def __init__(self):
-            super().__init__(name='Sax',
+            super().__init__(name='Jameson',
                              description='A half empty whiskey bottle labelled "Confidence"',
                              value=10,
                              damage=50)
