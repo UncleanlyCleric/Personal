@@ -3,13 +3,15 @@
 Here, we define the player themselves
 '''
 #pylint: disable = C0103, C0111
-import belmont_adventure.items as b
+import random
+from belmont_adventure.items import Item
+import belmont_adventure.world as world
 
 
 
 class Player():
     def __init__(self):
-        self.inventory = [b.Rock()]
+        self.inventory = [Item.Rock()]
         self.hp = 100
         self.location_x, self.location_y = world.starting_position
         self.victory = False
@@ -17,9 +19,11 @@ class Player():
     def is_alive(self):
         return self.hp < 0
 
+
     def print_inventory(self):
         for item in self.inventory:
             print(item, '\n')
+
 
     def move(self, dx, dy):
         self.location_x += dx
@@ -37,3 +41,20 @@ class Player():
 
     def move_west(self):
         self.move(dx=-1, dy=0)
+
+
+    def attack(self, enemy):
+        best_weapon = None
+        max_dmg = 0
+        for i in self.inventory:
+            if isinstance(i, Item.Weapon):
+                if i.damage > max_dmg:
+                    max_dmg = i.damage
+                    best_weapon = i
+
+        print('You use {} against {}!'.format(best_weapon.name, enemy.name))
+        enemy.hp -= best_weapon.damage
+        if not enemy.is_alive():
+            print('You killed {}!'.format(enemy.name))
+        else:
+            print('{} HP is {}.'.format(enemy.name, enemy.hp))
