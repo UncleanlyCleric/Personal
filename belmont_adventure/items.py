@@ -40,13 +40,26 @@ penis'.format(str(self.amt)),
 
     class Skeletonkey(Item):
         '''
-        The key to exit
+        The key to thrust into the Dickbutt
         '''
         def __init__(self, amt):
             self.amt = amt
             super().__init__(name='Skeleton Key',
                              description='A Skeleton Key with what appears to be \
-    a highly detailed sphincter under a set of testicles, stamped with a {}'.format\
+a highly detailed sphincter under a set of testicles, stamped with a {}'.format\
+                             (str(self.amt)),
+                             value=self.amt)
+
+
+    class DickbuttKey(Item):
+        '''
+        The magical combination of dickbutt and iron
+        '''
+        def __init__(self, amt):
+            self.amt = amt
+            super().__init__(name='Dick and Butt Key',
+                             description='A Key what was created by thrusting\
+the skeleton key into the Dickbutt\'s orifice. You feel somewhat dirty'.format\
                              (str(self.amt)),
                              value=self.amt)
 
@@ -107,8 +120,8 @@ penis'.format(str(self.amt)),
         def __init__(self):
             super().__init__(name='Demntor Wasp',
                              description='A very angry wasp, in a jar.  It constantly\
-     tries to coerce you into doing cocaine and murder in between singing gregorian \
-     chants backwards.',
+tries to coerce you into doing cocaine and murder in between singing gregorian \
+chants backwards.',
                              value=666,
                              damage=15)
 

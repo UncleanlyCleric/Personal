@@ -5,7 +5,9 @@ Creating the tiles for the coordinate plane.
 #pylint: disable = C0103, R0903, R0201, W0107
 from belmont_adventure.items import Item
 from belmont_adventure.items import Enemy
-
+'''
+https://letstalkdata.com/2014/08/how-to-write-a-text-adventure-in-python-part-2-the-world-space/
+'''
 
 class MapTile:
     '''
