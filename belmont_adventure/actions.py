@@ -5,8 +5,7 @@ The actions a player can take
 # pylint: disable = R0903
 
 from belmont_adventure.player import Player
-from belmont_adventure.items import Enemy, Item
-import belmont_adventure.world as world
+
 
 class Action():
     '''
@@ -78,30 +77,3 @@ class Action():
                              name='Attack',
                              hotkey='a',
                              enemy=enemy)
-
-
-    class MapTile():
-        def adjacent_moves(self):
-            '''
-            Returns all move actions for adjacent tiles.
-            '''
-            moves = []
-            if world.tile_exists(self.x + 1, self.y):
-                moves.append(self.MoveEast())
-            if world.tile_exists(self.x - 1, self.y):
-                moves.append(actions.MoveWest())
-            if world.tile_exists(self.x, self.y - 1):
-                moves.append(actions.MoveNorth())
-            if world.tile_exists(self.x, self.y + 1):
-                moves.append(actions.MoveSouth())
-            return moves
-
-
-        def available_actions(self):
-            '''
-            Returns all of the available actions in this room.
-            '''
-            moves = self.adjacent_moves()
-            moves.append(Player.actions.ViewInventory())
-
-            return moves

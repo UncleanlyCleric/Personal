@@ -5,6 +5,8 @@ Creating the tiles for the coordinate plane.
 #pylint: disable = C0103, R0903, R0201, W0107
 from belmont_adventure.items import Item
 from belmont_adventure.items import Enemy
+from belmont_adventure.actions import Action
+import belmont_adventure.world as world
 '''
 https://letstalkdata.com/2014/08/how-to-write-a-text-adventure-in-python-part-2-the-world-space/
 '''
@@ -16,6 +18,30 @@ class MapTile:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
+    def adjacent_moves(self):
+        '''
+        Returns all move actions for adjacent tiles.
+        '''
+        moves = []
+        if world.tile_exists(self.x + 1, self.y):
+            moves.append(Action.MoveEast())
+        if world.tile_exists(self.x - 1, self.y):
+            moves.append(Action.MoveWest())
+        if world.tile_exists(self.x, self.y - 1):
+            moves.append(Action.MoveNorth())
+        if world.tile_exists(self.x, self.y + 1):
+            moves.append(Action.MoveSouth())
+        return moves
+
+    def available_actions(self):
+        '''
+        Returns all of the available actions in this room.
+        '''
+        moves = self.adjacent_moves()
+        moves.append(Action.ViewInventory())
+
+        return moves
 
 
 class StartingRoom(MapTile):

@@ -58,3 +58,20 @@ class Player():
             print('You killed {}!'.format(enemy.name))
         else:
             print('{} HP is {}.'.format(enemy.name, enemy.hp))
+
+
+    def do_action(self, action, **kwargs):
+        '''
+        Player actions
+        '''
+        action_method = getattr(self, action.method.__name__)
+        if action_method:
+            action_method(**kwargs)
+
+    def flee(self, tile):
+        '''
+        Moves the player randomly to an adjacent tile
+        '''
+        available_moves = tile.adjacent_moves()
+        r = random.randint(0, len(available_moves) - 1)
+        self.do_action(available_moves[r])
