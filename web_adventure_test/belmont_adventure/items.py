@@ -169,7 +169,7 @@ class Gwen(Enemy):
     docstringing
     '''
     def __init__(self):
-        super().__init__(name='Gwen the Technicolor Shark', hp=30, damage=10)
+        super().__init__(name='Gwenny the Technicolor Shark', hp=30, damage=10)
 
 
 class Talbot(Enemy):
