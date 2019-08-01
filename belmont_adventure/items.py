@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 '''
 Items list for the Belmonts Bannermen website game.
-
-https://letstalkdata.com/2014/08/how-to-write-a-text-adventure-in-python-part-1-items-and-enemies/
-
 '''
 # pylint: disable = R0903, C0103
 class Item():
@@ -26,7 +23,8 @@ class Item():
 
     class Goldendickbutt(Item):
         '''
-        Creating the Golden Dickbutt, combine the Golden Dickbutt with the skeletonkey
+        Creating the Golden Dickbutt, combine the Golden Dickbutt with the \
+skeletonkey
         to exit the dungeon
         '''
         def __init__(self, amt):
@@ -106,8 +104,9 @@ the skeleton key into the Dickbutt\'s orifice. You feel somewhat dirty'.format\
         '''
         def __init__(self):
             super().__init__(name='Sword',
-                             description='A broad sword inscribed with the latin for\
-    "Put this in your ass".',
+                             description='A broad sword inscribed with the \
+                             latin for\
+"Put this in your ass".',
                              value=20,
                              damage=20)
 
@@ -118,7 +117,8 @@ the skeleton key into the Dickbutt\'s orifice. You feel somewhat dirty'.format\
         '''
         def __init__(self):
             super().__init__(name='Sax',
-                             description='A saxophone stamped with "Toot toot time to die".',
+                             description='A saxophone stamped with "Toot toot \
+time to die".',
                              value=10,
                              damage=10)
 
@@ -129,9 +129,9 @@ the skeleton key into the Dickbutt\'s orifice. You feel somewhat dirty'.format\
         '''
         def __init__(self):
             super().__init__(name='Demntor Wasp',
-                             description='A very angry wasp, in a jar.  It constantly\
-tries to coerce you into doing cocaine and murder in between singing gregorian \
-chants backwards.',
+                             description='A very angry wasp, in a jar.  It \
+constantly tries to coerce you into doing cocaine and murder in between singing\
+ gregorian chants backwards.',
                              value=666,
                              damage=15)
 
@@ -142,7 +142,8 @@ chants backwards.',
         '''
         def __init__(self):
             super().__init__(name='Jameson',
-                             description='A half empty whiskey bottle labelled "Confidence"',
+                             description='A half empty whiskey bottle labelled \
+"Confidence"',
                              value=10,
                              damage=50)
 
@@ -192,7 +193,8 @@ class Enemy:
         docstringing
         '''
         def __init__(self):
-            super().__init__(name='Gwenny the Technicolor Shark', hp=30, damage=10)
+            super().__init__(name='Gwenny the Technicolor Shark', hp=30,
+                             damage=10)
 
 
     class Talbot(Enemy):
@@ -208,4 +210,5 @@ class Enemy:
         Faaarrrrrrrrrrrrrrrrrrrrrrrrrrrrt
         '''
         def __init__(self):
-            super().__init__(name='Jesse the Far Too Sure of Himself', hp=60, damage=10)
+            super().__init__(name='Jesse the Far Too Sure of Himself', hp=60,
+                             damage=10)
