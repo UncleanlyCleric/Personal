@@ -132,7 +132,7 @@ class EmptyCavePath(MapTile):
 
 class Aidanroom(EnemyRoom):
     '''
-    A room with a Brit!
+    Room description and action
     '''
     def __init__(self, x, y):
         super().__init__(x, y, Enemy.Aidan())
@@ -144,13 +144,132 @@ class Aidanroom(EnemyRoom):
         if self.enemy.is_alive():
             return
             '''
+            Need to add room description.
+
             Aiden britishly leaps at you from his liquor bottle filled corner.
             In his hand flashes a golden statue of a penis.
             '''
 
         return
         '''
+        Need to add room description.
+
         The corpse of a dead englishman rots on the ground.
+        '''
+
+
+class Jamesroom(EnemyRoom):
+    '''
+    Room description and action
+    '''
+    def __init__(self, x, y):
+        super().__init__(x, y, Enemy.Aidan())
+
+    def intro_text(self):
+        '''
+        Self explanatory
+        '''
+        if self.enemy.is_alive():
+            return
+            '''
+            Description
+            '''
+
+        return
+        '''
+        Description
+        '''
+
+
+class Paulroom(EnemyRoom):
+    '''
+    Room description and action
+    '''
+    def __init__(self, x, y):
+        super().__init__(x, y, Enemy.Aidan())
+
+    def intro_text(self):
+        '''
+        Self explanatory
+        '''
+        if self.enemy.is_alive():
+            return
+            '''
+            Description
+            '''
+
+        return
+        '''
+        Description
+        '''
+
+
+class Gwenroom(EnemyRoom):
+    '''
+    Room description and action
+    '''
+    def __init__(self, x, y):
+        super().__init__(x, y, Enemy.Aidan())
+
+    def intro_text(self):
+        '''
+        Self explanatory
+        '''
+        if self.enemy.is_alive():
+            return
+            '''
+            Description
+            '''
+
+        return
+        '''
+        Description
+        '''
+
+
+class Talbotroom(EnemyRoom):
+    '''
+    Room description and action
+    '''
+    def __init__(self, x, y):
+        super().__init__(x, y, Enemy.Aidan())
+
+    def intro_text(self):
+        '''
+        Self explanatory
+        '''
+        if self.enemy.is_alive():
+            return
+            '''
+            Description
+            '''
+
+        return
+        '''
+        Description
+        '''
+
+
+class Jesseroom(EnemyRoom):
+    '''
+    Room description and action
+    '''
+    def __init__(self, x, y):
+        super().__init__(x, y, Enemy.Aidan())
+
+    def intro_text(self):
+        '''
+        Self explanatory
+        '''
+        if self.enemy.is_alive():
+            return
+            '''
+            Description
+            '''
+
+        return
+        '''
+        Description
         '''
 
 
