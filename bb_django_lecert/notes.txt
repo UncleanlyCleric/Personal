@@ -1,0 +1,29 @@
+Building a replacement https://belmonts-bannermen.org/
+
+The goal is to do the entire framework via Django, using LetsEncrypt as the SSL
+validation.
+
+Further, implement an update system based off of my djangoblog for
+Python230.  (Including the option for polls, because why the hell not.)
+
+Last we will also want to incorporate the already completed 404 page and the
+silly adventure game I'm working on.
+
+I'm envisioning a structure about like this on the backend:
+
+[bbwebsite]/
+  |-[mysite]/
+    |-__init.py__
+    |-settings/
+      |-common.py
+      |-development.py
+      |-__init.py__
+      |-production.py
+    |-urls.py
+    |-wsgi.py
+
+Followed by all stuff I'll need for the 404 and the game.
+
+Also, probably need to touch base with the Belmont kids and see what features
+they'd want.  Maybe a twitch window or something, dunno.  At the least, should
+be good for a night out for beer.
