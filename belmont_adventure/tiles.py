@@ -2,7 +2,7 @@
 '''
 Creating the tiles for the coordinate plane.
 '''
-#pylint: disable = C0103, R0903, R0201, W0107
+# pylint: disable = C0103, R0903, R0201, W0107
 from belmont_adventure.items import Item
 from belmont_adventure.items import Enemy
 from belmont_adventure.actions import Action
@@ -115,11 +115,12 @@ class EmptyCavePath(MapTile):
     '''
     def intro_text(self):
         '''
-        Self explanatory
+        You have reached an empty room.
         '''
         return
         '''
-        Another unremarkable part of the cave. You must forge onwards.
+        An unremarkable part of the dungeon. You must forge onwards, or don\'t,
+it really doesn\'t matter to me.
         '''
 
     def modify_player(self, player):

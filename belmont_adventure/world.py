@@ -6,7 +6,7 @@ Defining the world.  (I feel like a demigod)
 '''
 https://letstalkdata.com/2014/08/how-to-write-a-text-adventure-in-python-part-2-the-world-space/
 '''
-# pylint: disable = all
+# pylint: disable = C0103, C0200, W0603
 
 
 _world = {}

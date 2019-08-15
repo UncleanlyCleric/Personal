@@ -105,8 +105,7 @@ the skeleton key into the Dickbutt\'s orifice. You feel somewhat dirty'.format\
         def __init__(self):
             super().__init__(name='Sword',
                              description='A broad sword inscribed with the \
-                             latin for\
-"Put this in your ass".',
+latin for "Put this in your ass".',
                              value=20,
                              damage=20)
 
@@ -169,7 +168,7 @@ class Enemy:
         Why
         '''
         def __init__(self):
-            super().__init__(name='James the Red', hp=30, damage=20)
+            super().__init__(name='James of the Red Sphincter', hp=30, damage=20)
 
 
     class Paul(Enemy):
@@ -177,7 +176,7 @@ class Enemy:
         am
         '''
         def __init__(self):
-            super().__init__(name='Paul the Uncanny', hp=30, damage=15)
+            super().__init__(name='Paul the Uncannily Droopy', hp=30, damage=15)
 
 
     class Aidan(Enemy):
