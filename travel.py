@@ -16,7 +16,7 @@ d = au * (1.495978707 * 10 ** 11)
 
 
 traveltime = 2 * math.sqrt(k / a * (d // 2 * k + 1) - 1)
-days = traveltime / 86400 / 1440
+days = traveltime / 86400
 
 
 tsc = travel time from the ship's point of reference
