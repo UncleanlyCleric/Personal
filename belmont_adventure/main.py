@@ -2,10 +2,16 @@
 '''
 The main executable
 '''
-import flask
+# pylint: disable = C0103
+import os
+from flask import Flask
 import belmont_adventure.world as world
 from belmont_adventure.player import Player
 
+app = Flask(__name__)
+
+
+@app.route('/')
 def play():
     '''
     Game wrapper
@@ -29,3 +35,8 @@ def play():
                 if action_input == action.hotkey:
                     player.do_action(action, **action.kwargs)
                     break
+
+
+if __name__ == '__main__':
+    PORT = int(os.environ.get('PORT', 6787))
+    app.run(host='0.0.0.0', port=PORT)
