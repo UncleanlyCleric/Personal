@@ -60,13 +60,21 @@ def output(a, d):
     # d = .5 * (1.495978707 * 10 ** 11)
     k = c ** 2 / a
 
-    shiptime = ship_time(a, d, k)
-    traveltime = travel_time(a, c, d, k)
+    shiptime = ship_time(a, c, d, k)
+    traveltime = travel_time(a, d, k)
     vmax = c / math.sqrt(1 + (k / a * ((traveltime / 2) ** 2)))
 
-    print('This trip will take {} days, {} days of ship time.  The maximum\
-          velocity reached will be {}.  Clocks will resync once docked').format\
-          (traveltime, shiptime, vmax)
+    print(f'This trip will take {traveltime} days, {shiptime} days of ship time.\
+          The maximum velocity reached will be {vmax}.  Clocks will resync once \
+          docked')
 
 
 def menu():
+    prompt = '\n'.join(('Space travel time calculator 0.1.0',
+                        '',
+                        'Please choose from below options:',
+                        'route - If you want standard point to point flights',
+                        'custom - If you want to set a non-standard course',
+                        'list - If you would like to see standard destinations',
+                        'quit   - Exit',
+                        '>>> '))
