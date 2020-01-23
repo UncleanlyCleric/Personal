@@ -34,8 +34,16 @@ One thing I'm not going to worry about is fuel.  The assumption is fuel/weight
 problem has been solved by this point.  (Ex:  Epstien drive in The Expanse)
 
 '''
+import sys
 import math
 import numpy as np
+
+
+def safe_input():
+    '''
+    This will be for handling keyboard exceptions
+    '''
+    return None
 
 
 def travel_time(a, d, k):
@@ -55,21 +63,45 @@ def ship_time(a, c, d, k):
 
 
 def output(a, d):
-    # a = 1
+    '''
+    Collect and format our output
+    '''
     c = 2.99792458 * (10 ** 8)
-    # d = .5 * (1.495978707 * 10 ** 11)
-    k = c ** 2 / a
+    k = float(c ** 2 / a)
 
-    shiptime = ship_time(a, c, d, k)
-    traveltime = travel_time(a, d, k)
+    traveltime = travel_time(a, d, k) / 86400
+    shiptime = ship_time(a, c, d, k) / 86400
     vmax = c / math.sqrt(1 + (k / a * ((traveltime / 2) ** 2)))
 
-    print(f'This trip will take {traveltime} days, {shiptime} days of ship time.\
-          The maximum velocity reached will be {vmax}.  Clocks will resync once \
-          docked')
+    print(f'\nThis trip will take {traveltime} days, {shiptime} days of ship time. \
+The maximum velocity reached will be {vmax}.  \nClocks will be synced once docked.\n')
 
 
-def menu():
+def custom():
+    try:
+        a = float(input('Enter the travel speed in Gs (ex: 1, or .33): '))
+        au = float(input('Enter the travel distance in AUs (ex: .5 or 1): '))
+        d = au * (1.495978707 * 10 ** 11)
+        output(a, d)
+    except (KeyboardInterrupt, EOFError, ValueError):
+        safe_input()
+
+def route():
+    pass
+
+
+def goodbye():
+    '''
+    Gracefully exits
+    '''
+    print('Goodbye!')
+    sys.exit()
+
+
+def main():
+    '''
+    User input section
+    '''
     prompt = '\n'.join(('Space travel time calculator 0.1.0',
                         '',
                         'Please choose from below options:',
@@ -78,3 +110,28 @@ def menu():
                         'list - If you would like to see standard destinations',
                         'quit   - Exit',
                         '>>> '))
+
+    valid_input = ('route', '1', 'custom', '2', 'list', '3', 'quit', '4')
+
+    menu_choice = {'route': route,
+                   '1': route,
+                   'custom': custom,
+                   '2': custom,
+                   'list': list,
+                   '3': list,
+                   'quit': goodbye,
+                   '4': goodbye
+                   }
+
+    while True:
+        try:
+            response = input(prompt)
+        except (KeyboardInterrupt, EOFError):
+            continue
+        if response not in valid_input:
+            print('\nERROR: Invalid option')
+            continue
+        menu_choice[response]()
+
+if __name__ == '__main__':
+    main()
