@@ -34,6 +34,10 @@ vmax = c / math.sqrt(1 + (k / a * ((T / 2) ** 2)))
 One thing I'm not going to worry about is fuel.  The assumption is fuel/weight
 problem has been solved by this point.  (Ex:  Epstien drive in The Expanse)
 
+
+http://www.easysurf.cc/scintd.htm
+https://spacetravel.simhub.online/
+https://www.skythisweek.info/constant1g.pdf
 '''
 import sys
 import math
@@ -73,6 +77,7 @@ def output(a, d):
     traveltime = travel_time(a, d, k) / 86400
     shiptime = ship_time(a, c, d, k) / 86400
     vmax = c / math.sqrt(1 + k / (a * ((traveltime / 2)) ** 2)) / 1000
+    vmax = c / math.sqrt(1 + (c ** 2) / (a ** 2) * (traveltime / (2 ** 2)))
 
     print(f'\nThis trip will take {str(traveltime)[:5]} days, {str(shiptime)[:5]}\
 days of ship time. \
