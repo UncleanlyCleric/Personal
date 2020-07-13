@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#pylint: disable = C0103, C0116, C0115, C0114, R0903
+
 from __future__ import (
     unicode_literals,
     absolute_import,
@@ -30,7 +32,7 @@ valid_message_pattern = r'^(?![.!?]\s*\w+)'
 
 @client.event
 async def on_ready():
-    await setup()
+    await setup(bot)
     print('Logged into Discord as')
     print(client.user.name)
     print(client.user.id)
@@ -202,12 +204,11 @@ def irc_message(bot, trigger):
             }
             try:
                 r = requests.post('{}/webhooks/{}/{}'.format(
-                        discord_api_url, hook['id'], hook['token']
+                    discord_api_url, hook['id'], hook['token']
                     ),
-                    headers=headers,
-                    json=payload,
-                )
+                                  headers=headers,
+                                  json=payload,
+                                  )
                 r.raise_for_status()
             except HTTPError as e:
                 pass
-
