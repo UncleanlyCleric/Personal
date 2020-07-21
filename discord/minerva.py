@@ -34,15 +34,18 @@ from discord.ext import commands
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+OWM = os.getenv('OWM_TOKEN')
 
 '''
 check if database is made and load it
 '''
+timenow = datetime.datetime.now()
+formatted_timenow = str(timenow.strftime('%d-%m-%Y %H:%M'))
 db = sqlite3.connect('quotes.db')
 cursor = db.cursor()
 cursor.execute('CREATE TABLE IF NOT EXISTS quotes(hash TEXT primary key, user \
 TEXT, message TEXT, date_added TEXT)')
-print('Loaded quotes database')
+print('Loaded quotes database'+formatted_timenow)
 db.commit()
 
 
@@ -246,7 +249,7 @@ async def weather(ctx, *, city: typing.Optional[str] = 'Seattle',
     if city is None:
         await ctx.send('You must enter a city and two letter country code')
 
-    owm = pyowm.OWM('f1244682f8d9b4dd7b9f5ec4ee83c8d4')
+    owm = pyowm.OWM(OWM)
     await ctx.trigger_typing()
     mgr = owm.weather_manager()
     obs = mgr.weather_at_place(city+','+country)
@@ -396,7 +399,6 @@ async def catadd(ctx, *, message: str):
     with open('/home/junya/discord/categories/'+category+'.txt', 'a') as f:
         f.write(message+'\n')
         await ctx.send('Added to '+category)
-
 
 # @bot.command(helpinfo='Network whois')
 # async def whois(ctx, *, message: str):

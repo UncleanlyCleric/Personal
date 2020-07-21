@@ -43,7 +43,8 @@ cogs = [
     'cogs.embed',
     'cogs.gaming',
     'cogs.weather',
-    'cogs.quotes'
+    'cogs.quotes',
+    'cogs.catagories'
     ]
 
 @bot.event
@@ -103,7 +104,7 @@ def main():
     Start up order.  Creates the loop that asyncio wants and sets the connection
     to the supervisor
     '''
-    bot.run(TOKEN, bot=True, reconnect=True)
+    bot.run(TOKEN, bot=True)
     logging.getLogger().setLevel(logging.INFO)
     loop = asyncio.get_event_loop()
     future = asyncio.ensure_future(supervisor(loop))
