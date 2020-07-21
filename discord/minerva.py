@@ -2,7 +2,10 @@
 #pylint: disable = C0103, W0631, W0703, W0612
 
 '''
-Recoding both of my old IRC bots into one, and moving to Discord
+Recoding both of my old IRC bots into one, and moving to Discord. This is not
+the best code.  It's mostly for me to practice.
+
+J. Miller
 '''
 
 import asyncio
@@ -17,6 +20,7 @@ import datetime
 import typing
 
 from concurrent.futures import CancelledError
+# import whois as who
 import requests
 
 from dotenv import load_dotenv
@@ -57,12 +61,17 @@ async def on_ready():
         f'{bot.user.name} is connected.'
     )
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True, name='ping', description='A basic ping command')
 async def ping(ctx):
     '''
     A simple test for the bot
     '''
-    await ctx.send('pong')
+    start = datetime.datetime.timestamp(datetime.datetime.now())
+    msg = await ctx.send(content='Pinging')
+    await msg.edit(content=f'Pong!\nOne message round-trip took\
+ {( datetime.datetime.timestamp( datetime.datetime.now() ) - start ) * 1000 }ms.')
+    return
+    # await ctx.send('pong')
 
 
 @bot.event
@@ -73,7 +82,7 @@ async def on_member_join(member):
     await member.create_dm()
     await member.dm_channel.send(
         f"Hi {member.name}, welcome to Sincerely, Not Serious! I'm Minerva!\n"
-        f'notbullshit is our main chat\n'
+        f'just-some-bullshit is our main chat\n'
         f'sportsball is for all your sports chatter\n'
         f'uspol is the politics quarantine zone\n'
         f'uspol-newsfeed is a birdsite feed of various news orgs\n'
@@ -389,6 +398,15 @@ async def catadd(ctx, *, message: str):
         await ctx.send('Added to '+category)
 
 
+# @bot.command(helpinfo='Network whois')
+# async def whois(ctx, *, message: str):
+    # '''
+    # Network whois lookup
+    # '''
+    # w = who.whois(message)
+    # ctx.send(w)
+
+
 '''
 Below defines the startup and shutdown functions
 '''
@@ -438,7 +456,7 @@ def main():
     bot.run(TOKEN)
     logging.getLogger().setLevel(logging.INFO)
     loop = asyncio.get_event_loop()
-    future = asyncio.ensure_future(loop)
+    future = asyncio.ensure_future(supervisor(loop))
     loop.add_signal_handler(signal.SIGHUP, functools.partial(shutdown, loop))
     loop.add_signal_handler(signal.SIGTERM, functools.partial(shutdown, loop))
     supervisor(loop)
