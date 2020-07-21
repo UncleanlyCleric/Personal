@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+# pylint: disable = C0103
+print('This program will capture your Home Inventory and its Value')
+
+strUserInput = ''
+
+while True:
+    strUserInput = input('Type 1 to enter an Item & its Value, or 0 to quit.')
+    if (strUserInput == '1'):
+        inventoryItem = input('Enter Item: ')
+        inventoryValue = input('Enter Value: ')
+        print('You entered: ', inventoryItem, ', ', inventoryValue)
+        listData = [inventoryItem, inventoryValue]
+        objHomeInventory = ('/Users/cleric/HomeInventory.txt')
+        objHomeInventory = open('/Users/cleric/HomeInventory', 'a')
+        objHomeInventory.write(listData[0] + ' ' + listData[1] +  '\n')
+    else:
+        (objHomeInventory.close())
+
+    if (strUserInput == '0'): break
+
+print('Your List Contains')
+
+lstTable = []
+objFile = '/Users/cleric/HomeInventory.txt'
+
+
+with open(objFile) as ploopy:
+    for row in ploopy.readlines():
+#        lstRow = row.split(',')
+#        try:
+#            lstTable.append(lstRow[0], lstRow[1])
+#        except:
+#            pass
+
+        print(row)

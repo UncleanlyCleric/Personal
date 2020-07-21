@@ -4,9 +4,7 @@
 This is a first pass at writing a solar system transit time program.  The idea
 will be to compensate for orbits, varying speeds of constant thrust and time
 under float, to give a semi-accurate model of solar space travel.
-
 Maybe I'll run this game, maybe I won't.
-
 
 traveltime = travel time
 k = c ** 2 / a
@@ -15,25 +13,18 @@ a = acceleration / deceleration
 au = distance in AU
 d = au * 149597870700
          149597870691
-
-
 traveltime = 2 * math.sqrt(k / a * math.floor((d / 2 * k + 1) ** 2) - 1)
 days = traveltime // 86400
-
-
 tsc = travel time from the ship's point of reference
 acosh = inverse hyperbolic cosine
-
 tsc = ((2 * c) / a ) * ( math.acosh * math.round( ( d / (2 * k ) ) + 1 ) )
 shipdays = tsc // 86400
 
-
-vamx = Maximum velocty at the halfway point (flip and decelerate)
+vmax = Maximum velocty at the halfway point (flip and decelerate)
 vmax = c / math.sqrt(1 + (k / a * ((T / 2) ** 2)))
 
 One thing I'm not going to worry about is fuel.  The assumption is fuel/weight
-problem has been solved by this point.  (Ex:  Epstien drive in The Expanse)
-
+problem has been solved by this point.  (Ex:  Epstein drive in The Expanse)
 
 http://www.easysurf.cc/scintd.htm
 https://spacetravel.simhub.online/
@@ -50,11 +41,13 @@ def safe_input():
     return None
 
 
-def travel_time(a, d, k):
+def travel_time(a, c, d):
     '''
     Meat and potatoes of the back of the hand math to calculate travel time
     '''
-    traveltime = 2 * math.sqrt(k / a * math.floor((d / 2 * k + 1) ** 2) - 1)
+    #traveltime = 2 * math.sqrt(k / a * math.floor((d / 2 * k + 1) ** 2) - 1)
+    traveltime = 2 * math.sqrt((c ** 2 / a ** 2) *
+                               math.floor(d / (2 * (c ** 2 / a) + 1) ** 2 - 1))
     return traveltime
 
 
@@ -74,18 +67,21 @@ def output(a, d):
     c = 2.99792458 * (10 ** 8)
     k = float(c ** 2 / a)
 
-    traveltime = travel_time(a, d, k) / 86400
+    traveltime = travel_time(a, c, d) / 86400
     shiptime = ship_time(a, c, d, k) / 86400
-    vmax = c / math.sqrt(1 + k / (a * ((traveltime / 2)) ** 2)) / 1000
     vmax = c / math.sqrt(1 + (c ** 2) / (a ** 2) * (traveltime / (2 ** 2)))
 
-    print(f'\nThis trip will take {str(traveltime)[:5]} days, {str(shiptime)[:5]}\
+    print(f'\nThis trip will take {str(traveltime)[:5]} days, {str(shiptime)[:5]} \
 days of ship time. \
 \nThe maximum velocity reached will be {vmax} kph.  \
 \n\nClocks will be synced once docked.\n')
 
 
 def custom():
+    '''
+    The custom entry for travel specs.  This populates a(cceleration), and au(
+    distance) to be sent to the calculations.
+    '''
     try:
         a = float(input('Enter the travel speed in Gs (ex: 1, or .33): '))
         au = float(input('Enter the travel distance in AUs (ex: .5 or 1): '))
@@ -95,7 +91,9 @@ def custom():
         safe_input()
 
 def route():
-    pass
+    '''
+    This will be where the common travel points are set.
+    '''
 
 
 def goodbye():
