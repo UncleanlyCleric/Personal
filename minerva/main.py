@@ -1,17 +1,21 @@
 #!/usr/bin/env python3.7
-# pylint: disable = W0612
+# pylint: disable = W0612, C0103, W0703
 '''
 Bot setup
 '''
 import os
 import sys
+import datetime
 import asyncio
 import logging
 import signal
+import sqlite3
 import functools
+import traceback
 
 from concurrent.futures import CancelledError
 from dotenv import load_dotenv
+import discord
 from discord.ext import commands
 
 load_dotenv()
@@ -19,14 +23,21 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 OWNER = os.getenv('OWNER_ID')
 
+
+timenow = datetime.datetime.now()
+formatted_timenow = str(timenow.strftime('%d-%m-%Y %H:%M'))
+db = sqlite3.connect('quotes.db')
+cursor = db.cursor()
+cursor.execute('CREATE TABLE IF NOT EXISTS quotes(hash TEXT primary key, user \
+TEXT, message TEXT, date_added TEXT)')
+print('Loaded quotes database'+formatted_timenow)
+db.commit()
+
 def get_prefix(client, message):
     '''
     Setting the prefix for the commands
     '''
-    prefixes = ['!', '!!']
-
-    if not message.guild:
-        prefixes = ['!!']   # Only allow as a prefix when in DMs
+    prefixes = ['!']
 
     # Allow users to @mention the bot to trigger commands as well.
     return commands.when_mentioned_or(*prefixes)(client, message)
@@ -39,12 +50,12 @@ bot = commands.Bot(
 )
 
 cogs = [
-    'cogs.ping',
     'cogs.embed',
     'cogs.gaming',
     'cogs.weather',
     'cogs.quotes',
-    'cogs.catagories'
+    'cogs.info',
+    'cogs.search'
     ]
 
 @bot.event
@@ -55,8 +66,38 @@ async def on_ready():
     print(f'Logged in as {bot.user.name} - {bot.user.id}')
     bot.remove_command('help')
     for cog in cogs:
-        bot.load_extension(cog)
-    return
+        try:
+            bot.load_extension(cog)
+        except Exception as e:
+            print(f'Failed to load extension {cog}.', file=sys.stderr)
+            traceback.print_exc()
+
+@bot.event
+async def on_command_error(ctx, error):
+    '''
+    Unknown command handler
+    '''
+    if isinstance(error, discord.ext.commands.errors.CommandNotFound):
+        await ctx.send('That command was not found.')
+
+@bot.event
+async def on_member_join(member):
+    '''
+    New member welcome
+    '''
+    await member.create_dm()
+    await member.dm_channel.send(
+        f"Hi {member.name}, welcome to Sincerely, Not Serious! I'm Minerva!\n"
+        f'just-some-bullshit is our main chat\n'
+        f'sportsball is for all your sports chatter\n'
+        f'uspol is the politics quarantine zone\n'
+        f'uspol-newsfeed is a birdsite feed of various news orgs\n'
+        f'nmd is for no music discussion, which is iron(maiden)y\n'
+        f'no-mans-high is the current name of the gaming channel\n'
+        f'Please enjoy your stay!'
+    )
+
+
 
 '''
 Below defines the startup and shutdown functions

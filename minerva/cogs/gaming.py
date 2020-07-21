@@ -41,7 +41,7 @@ class Roll(commands.Cog):
             total += i
 
         finaltotal = 'You rolled {} on dice, + {}, for a total of \
-    {}!'.format(result, modifier, (int(total) + modifier))
+{}!'.format(result, modifier, (int(total) + modifier))
 
         await ctx.send(finaltotal)
 

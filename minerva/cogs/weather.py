@@ -20,7 +20,7 @@ class Weather(commands.Cog):
     Discord embed.
     '''
     @commands.command(
-        name='!weather',
+        name='weather',
         description='Weather information. Eg. Seattle, WA or Moscow, RU',
         aliases=['w']
         )

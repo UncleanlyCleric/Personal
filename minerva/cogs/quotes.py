@@ -7,6 +7,8 @@ Categories is our old IRC flatfile DB
 
 import sqlite3
 import datetime
+import random
+
 import discord
 from discord.ext import commands
 
@@ -132,6 +134,47 @@ ORDER BY RANDOM() LIMIT 1', user)
             await ctx.send('No quotes of that user found')
             print(e)
         db.commit()
+
+    @commands.command(
+        name='cat',
+        description='Pulls a quote from the catagories.  !cat <catagory>',
+        )
+
+    async def cat(self, ctx, *, category: str):
+        '''
+        The old categories script, modernized.  Currently, reading from files
+        is supported.  Adding to files is a WIP.  Once all that works, time to begin
+        the big SQLite work.
+        '''
+        try:
+            with open('/home/junya/discord/categories/'+category+'.txt') as f:
+                lines = f.readlines()
+                await ctx.send(random.choice(lines))
+        except FileNotFoundError as e:
+            await ctx.send('No category found by that name.')
+
+    @commands.command(
+        name='addcat',
+        description='Pulls a quote from the catagories.  !cat <catagory>',
+        aliases=['catadd']
+        )
+
+    async def catadd(self, ctx, *, message: str):
+        '''
+        Some luck, and this won't destroy things as it adds to categories or creates
+        new files.
+        '''
+        strings = str(message)
+        temp = strings.split()
+
+        category = temp[0]
+        del temp[0]
+
+        message = ' '.join(temp)
+
+        with open('/home/junya/discord/categories/'+category+'.txt', 'a') as f:
+            f.write(message+'\n')
+            await ctx.send('Added to '+category)
 
 
 def setup(bot):

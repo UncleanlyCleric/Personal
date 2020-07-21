@@ -19,7 +19,7 @@ class Category(commands.Cog):
         self.bot = bot
 
     @commands.command(
-        name='!cat',
+        name='cat',
         description='Pulls a quote from the catagories.  !cat <catagory>',
         )
 
@@ -37,7 +37,7 @@ class Category(commands.Cog):
             await ctx.send('No category found by that name.')
 
     @commands.command(
-        name='!addcat',
+        name='addcat',
         description='Pulls a quote from the catagories.  !cat <catagory>',
         aliases=['catadd']
         )
