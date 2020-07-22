@@ -30,7 +30,7 @@ db = sqlite3.connect('quotes.db')
 cursor = db.cursor()
 cursor.execute('CREATE TABLE IF NOT EXISTS quotes(hash TEXT primary key, user \
 TEXT, message TEXT, date_added TEXT)')
-print('Loaded quotes database'+formatted_timenow)
+print('Loaded quotes database '+formatted_timenow)
 db.commit()
 
 def get_prefix(client, message):
@@ -49,13 +49,17 @@ bot = commands.Bot(
     case_insensitive=False
 )
 
+bot.remove_command('help')
+
 cogs = [
     'cogs.embed',
     'cogs.gaming',
+#    'cogs.roll',
     'cogs.weather',
     'cogs.quotes',
     'cogs.info',
-    'cogs.search'
+    'cogs.search',
+    'cogs.help'
     ]
 
 '''
@@ -110,7 +114,6 @@ def main():
         Successful Discord connect notification (in console)
         '''
         print(f'Logged in as {bot.user.name} - {bot.user.id}')
-        bot.remove_command('help')
         for cog in cogs:
             try:
                 bot.load_extension(cog)
@@ -150,9 +153,6 @@ def main():
     loop.add_signal_handler(signal.SIGHUP, functools.partial(shutdown, loop))
     loop.add_signal_handler(signal.SIGTERM, functools.partial(shutdown, loop))
     supervisor(loop)
-
-
-
 
 if __name__ == '__main__':
     main()

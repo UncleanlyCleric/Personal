@@ -33,7 +33,7 @@ class Quotes(commands.Cog):
 
     async def random_quotes(self, ctx):
         '''
-        Pulling random things from the db
+        Returns a random quote from the DB
         '''
         cursor.execute('SELECT user,message,date_added FROM quotes ORDER BY RANDOM() \
     LIMIT 1')
@@ -55,7 +55,7 @@ class Quotes(commands.Cog):
 
     async def quote(self, ctx, *, message: str):
         '''
-        Adding quotes to the sqlite3 db
+        Adding quotes to the quote db
         '''
         #split the message into words
         strings = str(message)
@@ -106,7 +106,7 @@ class Quotes(commands.Cog):
 
     async def getquote(self, ctx, message: str):
         '''
-        Querying the db for a random quote from the db attached to a user
+        Requests quote from selected user.
         '''
         #sanitise name
         user = (message,)
@@ -142,9 +142,7 @@ ORDER BY RANDOM() LIMIT 1', user)
 
     async def cat(self, ctx, *, category: str):
         '''
-        The old categories script, modernized.  Currently, reading from files
-        is supported.  Adding to files is a WIP.  Once all that works, time to begin
-        the big SQLite work.
+        Pulls a quote from the catagories.  !cat <catagory>
         '''
         try:
             with open('/home/junya/discord/categories/'+category+'.txt') as f:
@@ -155,14 +153,13 @@ ORDER BY RANDOM() LIMIT 1', user)
 
     @commands.command(
         name='addcat',
-        description='Pulls a quote from the catagories.  !cat <catagory>',
+        description='!addcat <catagory>',
         aliases=['catadd']
         )
 
     async def catadd(self, ctx, *, message: str):
         '''
-        Some luck, and this won't destroy things as it adds to categories or creates
-        new files.
+        !addcat <catagory>
         '''
         strings = str(message)
         temp = strings.split()

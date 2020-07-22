@@ -20,14 +20,12 @@ class Category(commands.Cog):
 
     @commands.command(
         name='cat',
-        description='Pulls a quote from the catagories.  !cat <catagory>',
+        description='Pulls a quote from the catagories.',
         )
 
     async def cat(self, ctx, *, category: str):
         '''
-        The old categories script, modernized.  Currently, reading from files
-        is supported.  Adding to files is a WIP.  Once all that works, time to begin
-        the big SQLite work.
+        !cat <category>
         '''
         try:
             with open('/home/junya/discord/categories/'+category+'.txt') as f:
@@ -44,8 +42,7 @@ class Category(commands.Cog):
 
     async def catadd(self, ctx, *, message: str):
         '''
-        Some luck, and this won't destroy things as it adds to categories or creates
-        new files.
+        Adds data to categories
         '''
         strings = str(message)
         temp = strings.split()

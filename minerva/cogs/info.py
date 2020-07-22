@@ -4,6 +4,7 @@ Anything giving info on something goes here.
 '''
 # pylint: disable = C0103, W0612, W0703
 import datetime
+
 import discord
 from discord.ext import commands
 
@@ -24,7 +25,7 @@ class Info(commands.Cog):
         )
     async def zoom(self, ctx):
         '''
-        Link to our zoom
+        Blake White Memorial Videoconference room
         '''
         await ctx.send(
             'https://us04web.zoom.us/j/3025651220?pwd=K0xRc0FwQStLNnlBT2VWNlhJZm16Zz09'
@@ -37,7 +38,7 @@ class Info(commands.Cog):
         )
     async def info(self, ctx):
         '''
-        Grabs guild information from Discord and displays
+        Displays server information
         '''
         embed = discord.Embed(title=f"{ctx.guild.name}", description="Waste v3.0",
                               timestamp=datetime.datetime.utcnow(),
@@ -56,7 +57,7 @@ class Info(commands.Cog):
 
     async def ping_command(self, ctx):
         '''
-        This is where we set up the latency ping
+        Latency test for bot to server.
         '''
         start = datetime.datetime.timestamp(datetime.datetime.now())
         msg = await ctx.send(content='Pinging')
@@ -64,7 +65,6 @@ class Info(commands.Cog):
         await msg.edit(content=f'Pong!\nOne message round-trip took \
 {( datetime.datetime.timestamp( datetime.datetime.now() ) - start ) * 1000 }ms.')
         return
-
 
 def setup(bot):
     '''

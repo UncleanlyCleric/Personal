@@ -62,8 +62,7 @@ class Search(commands.Cog):
 
     async def google(self, ctx, *, searchquery: str):
         '''
-        Should be a group in the future
-        Googles searchquery, or images if you specified that
+        Googles search or images
         '''
         try:
             for j in search(searchquery, tld="com", num=1, stop=1, pause=2):

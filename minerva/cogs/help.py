@@ -1,62 +1,58 @@
 #!/usr/bin/env python3.7
-# pylint: disable = C0103, W0703, W0612,R0912, R1702
-'''
-This hopefully will auto gen a help list.
-'''
-import warnings
+# pylint: disable = C0103,R0912, R1702, W0105
 import discord
-
 from discord.ext import commands
 
-class Help(commands.Cog):
-    '''
-    Dynamic help command.
-    '''
-    def __getattr__(self, name):
-        '''
-        will only get called for undefined attributes
-        '''
-        warnings.warn('No member "%s" contained in settings config.' % name)
-        return ''
+"""This custom help command is a perfect replacement for the default one on any
+Discord Bot written in Discord.py! However, you must put "bot.remove_command('help')"
+in your bot, and the command must be in a cog for it to work. Written by
+Jared Newsom (AKA Jared M.F.)! - edited by ceron21"""
 
-    @commands.command(pass_context=True)
+"""
+paste this into your (mail) bot code after defining your bot:
+# LOADING Extentions
+bot.remove_command('help')
+initial_extensions = [
+        'cogs.help' #path is here cogs/help.py
+            ]
+"""
+class Help(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command()
     @commands.has_permissions(add_reactions=True, embed_links=True)
     async def help(self, ctx, *cog):
-        '''
-        Gets all cogs and commands of mine.
-        '''
+        """Gets all cogs and commands of mine."""
         try:
             if not cog:
-                '''
-                Cog listing.  What more?
-                '''
+                """Cog listing.  What more?"""
                 halp = discord.Embed(title='Cog Listing and Uncatergorized Commands',
-                                     description='Use `!help *cog*` to find out \
-more about them!\n(BTW, the Cog Name Must Be in Title Case, Just Like this Sentence.)')
+                                     description='Use `!help *cog*` to find out more \
+about them!\n(BTW, the Cog Name Must Be in Title Case, Just Like this Sentence.)')
                 cogs_desc = ''
                 for x in self.bot.cogs:
                     cogs_desc += ('{} - {}'.format(x, self.bot.cogs[x].__doc__)+'\n')
-                halp.add_field(name='Cogs', value=cogs_desc[0:len(cogs_desc)-1], inline=False)
+                halp.add_field(name='Cogs', value=cogs_desc[0:len(cogs_desc)-1],
+                               inline=False)
                 cmds_desc = ''
                 for y in self.bot.walk_commands():
                     if not y.cog_name and not y.hidden:
                         cmds_desc += ('{} - {}'.format(y.name, y.help)+'\n')
-                halp.add_field(name='Uncatergorized Commands', value=cmds_desc
-                               [0:len(cmds_desc)-1], inline=False)
+                if cmds_desc != '':
+                    halp.add_field(name='Uncatergorized Commands',
+                                   value=cmds_desc[0:len(cmds_desc) - 1],
+                                   inline=False)
                 await ctx.message.add_reaction(emoji='✉')
                 await ctx.message.author.send('', embed=halp)
             else:
-                '''
-                Helps me remind you if you pass too many args.
-                '''
+                """Helps me remind you if you pass too many args."""
                 if len(cog) > 1:
-                    halp = discord.Embed(title='Error!', description='That is way too \
-many cogs!', color=discord.Color.red())
+                    halp = discord.Embed(title='Error!', description='That is \
+way too many cogs!', color=discord.Color.red())
                     await ctx.message.author.send('', embed=halp)
                 else:
-                    '''
-                    Command listing within a cog.
-                    '''
+                    """Command listing within a cog."""
                     found = False
                     for x in self.bot.cogs:
                         for y in cog:
@@ -68,19 +64,14 @@ many cogs!', color=discord.Color.red())
                                         halp.add_field(name=c.name, value=c.help, inline=False)
                                 found = True
                     if not found:
-                        '''
-                        Reminds you if that cog doesn't exist.
-                        '''
+                        """Reminds you if that cog doesn't exist."""
                         halp = discord.Embed(title='Error!', description='How do \
-    you even use ''+cog[0]+''?', color=discord.Color.red())
+you even use "'+cog[0]+'"?', color=discord.Color.red())
                     else:
                         await ctx.message.add_reaction(emoji='✉')
                     await ctx.message.author.send('', embed=halp)
-        except Exception as e:
+        except:
             await ctx.send("Excuse me, I can't send embeds.")
 
 def setup(bot):
-    '''
-    Sending the cog to the main bot
-    '''
     bot.add_cog(Help(bot))
