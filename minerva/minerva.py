@@ -58,47 +58,6 @@ cogs = [
     'cogs.search'
     ]
 
-@bot.event
-async def on_ready():
-    '''
-    Successful Discord connect notification (in console)
-    '''
-    print(f'Logged in as {bot.user.name} - {bot.user.id}')
-    bot.remove_command('help')
-    for cog in cogs:
-        try:
-            bot.load_extension(cog)
-        except Exception as e:
-            print(f'Failed to load extension {cog}.', file=sys.stderr)
-            traceback.print_exc()
-
-@bot.event
-async def on_command_error(ctx, error):
-    '''
-    Unknown command handler
-    '''
-    if isinstance(error, discord.ext.commands.errors.CommandNotFound):
-        await ctx.send('That command was not found.')
-
-@bot.event
-async def on_member_join(member):
-    '''
-    New member welcome
-    '''
-    await member.create_dm()
-    await member.dm_channel.send(
-        f"Hi {member.name}, welcome to Sincerely, Not Serious! I'm Minerva!\n"
-        f'just-some-bullshit is our main chat\n'
-        f'sportsball is for all your sports chatter\n'
-        f'uspol is the politics quarantine zone\n'
-        f'uspol-newsfeed is a birdsite feed of various news orgs\n'
-        f'nmd is for no music discussion, which is iron(maiden)y\n'
-        f'no-mans-high is the current name of the gaming channel\n'
-        f'Please enjoy your stay!'
-    )
-
-
-
 '''
 Below defines the startup and shutdown functions
 '''
@@ -145,6 +104,45 @@ def main():
     Start up order.  Creates the loop that asyncio wants and sets the connection
     to the supervisor
     '''
+    @bot.event
+    async def on_ready():
+        '''
+        Successful Discord connect notification (in console)
+        '''
+        print(f'Logged in as {bot.user.name} - {bot.user.id}')
+        bot.remove_command('help')
+        for cog in cogs:
+            try:
+                bot.load_extension(cog)
+            except Exception as e:
+                print(f'Failed to load extension {cog}.', file=sys.stderr)
+                traceback.print_exc()
+
+    @bot.event
+    async def on_command_error(ctx, error):
+        '''
+        Unknown command handler
+        '''
+        if isinstance(error, discord.ext.commands.errors.CommandNotFound):
+            await ctx.send('That command was not found.')
+
+    @bot.event
+    async def on_member_join(member):
+        '''
+        New member welcome
+        '''
+        await member.create_dm()
+        await member.dm_channel.send(
+            f"Hi {member.name}, welcome to Sincerely, Not Serious! I'm Minerva!\n"
+            f'just-some-bullshit is our main chat\n'
+            f'sportsball is for all your sports chatter\n'
+            f'uspol is the politics quarantine zone\n'
+            f'uspol-newsfeed is a birdsite feed of various news orgs\n'
+            f'nmd is for no music discussion, which is iron(maiden)y\n'
+            f'no-mans-high is the current name of the gaming channel\n'
+            f'Please enjoy your stay!'
+        )
+
     bot.run(TOKEN, bot=True)
     logging.getLogger().setLevel(logging.INFO)
     loop = asyncio.get_event_loop()
@@ -152,6 +150,8 @@ def main():
     loop.add_signal_handler(signal.SIGHUP, functools.partial(shutdown, loop))
     loop.add_signal_handler(signal.SIGTERM, functools.partial(shutdown, loop))
     supervisor(loop)
+
+
 
 
 if __name__ == '__main__':
