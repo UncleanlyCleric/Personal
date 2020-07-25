@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.7
+#!/usr/bin/env python3
 # pylint: disable = C0103, R1721,
 '''
 Lets let users make their own embeds, why not

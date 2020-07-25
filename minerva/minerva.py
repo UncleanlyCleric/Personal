@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.7
+#!/usr/bin/env python3
 # pylint: disable = W0612, C0103, W0703
 '''
 Bot setup
@@ -54,12 +54,12 @@ bot.remove_command('help')
 cogs = [
     'cogs.embed',
     'cogs.gaming',
-#    'cogs.roll',
     'cogs.weather',
     'cogs.quotes',
     'cogs.info',
     'cogs.search',
-    'cogs.help'
+    'cogs.help',
+    'cogs.twitter'
     ]
 
 '''

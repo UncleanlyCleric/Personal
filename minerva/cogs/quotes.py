@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.7
+#!/usr/bin/env python3
 '''
 Here we have quotes, and categories.  These will be combined later.
 Categories is our old IRC flatfile DB
@@ -18,7 +18,9 @@ cursor = db.cursor()
 
 class Quotes(commands.Cog):
     '''
-    The !quote command.  This WILL change once I get the !cat command in a db
+    The !quote command.  !random_quotes pills a random quote.  !quote <name> <text>
+    adds to the DB.  !getquote <user> pulls a quote for that user.
+    !cat and !addcat are here as well.  These are the old IRC categories.   
     '''
     def __init__(self, bot):
         '''

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.7
+#!/usr/bin/env python3
 # pylint: disable = W0703
 '''
 This will be the tabletop gaming cog.  Roll is the only command initiated at

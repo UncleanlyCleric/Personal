@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.7
+#!/usr/bin/env python3
 '''
 Here we have quotes, and categories.  These will be combined later.
 Categories is our old IRC flatfile DB

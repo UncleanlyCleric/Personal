@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.7
+#!/usr/bin/env python3
 '''
 Various web search utilities will go here.
 '''
@@ -13,7 +13,7 @@ YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
 
 class Search(commands.Cog):
     '''
-    This is the old category script. Will be placed in a DB eventually
+    This contains !google and !youtube which should be obvious their intent.
     '''
     def __init__(self, bot):
         '''
