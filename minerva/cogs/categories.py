@@ -28,7 +28,7 @@ class Category(commands.Cog):
         !cat <category>
         '''
         try:
-            with open('/home/junya/discord/categories/'+category+'.txt') as f:
+            with open('/home/cleric/discord/categories/'+category+'.txt') as f:
                 lines = f.readlines()
                 await ctx.send(random.choice(lines))
         except FileNotFoundError as e:
@@ -52,7 +52,7 @@ class Category(commands.Cog):
 
         message = ' '.join(temp)
 
-        with open('/home/junya/discord/categories/'+category+'.txt', 'a') as f:
+        with open('/home/cleric/discord/categories/'+category+'.txt', 'a') as f:
             f.write(message+'\n')
             await ctx.send('Added to '+category)
 

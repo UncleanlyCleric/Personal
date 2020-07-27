@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 '''
 A weather script.  Uses OWM to grab weather data.
 '''

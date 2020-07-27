@@ -20,7 +20,7 @@ class Quotes(commands.Cog):
     '''
     The !quote command.  !random_quotes pills a random quote.  !quote <name> <text>
     adds to the DB.  !getquote <user> pulls a quote for that user.
-    !cat and !addcat are here as well.  These are the old IRC categories.   
+    !cat and !addcat are here as well.  These are the old IRC categories.
     '''
     def __init__(self, bot):
         '''
@@ -147,7 +147,7 @@ ORDER BY RANDOM() LIMIT 1', user)
         Pulls a quote from the catagories.  !cat <catagory>
         '''
         try:
-            with open('/home/junya/discord/categories/'+category+'.txt') as f:
+            with open('/home/cleric/discord/categories/'+category+'.txt') as f:
                 lines = f.readlines()
                 await ctx.send(random.choice(lines))
         except FileNotFoundError as e:
@@ -171,7 +171,7 @@ ORDER BY RANDOM() LIMIT 1', user)
 
         message = ' '.join(temp)
 
-        with open('/home/junya/discord/categories/'+category+'.txt', 'a') as f:
+        with open('/home/cleric/discord/categories/'+category+'.txt', 'a') as f:
             f.write(message+'\n')
             await ctx.send('Added to '+category)
 

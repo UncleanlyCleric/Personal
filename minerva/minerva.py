@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 # pylint: disable = W0612, C0103, W0703
 '''
 Bot setup
